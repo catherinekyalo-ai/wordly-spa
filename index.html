@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordly — Dictionary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="masthead">
+    <div class="masthead-inner">
+      <h1 class="wordmark">Wordly<span class="wordmark-dot">.</span></h1>
+      <p class="tagline">a running dictionary, kept as you read</p>
+      <div class="theme-toggle">
+        <button id="themeBtn" type="button" aria-label="Toggle page theme">Night reading</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="page">
+
+    <section class="search-rail" aria-label="Search for a word">
+      <form id="searchForm" class="search-form">
+        <label for="wordInput" class="visually-hidden">Search for a word</label>
+        <span class="entry-number">01</span>
+        <input
+          type="text"
+          id="wordInput"
+          name="word"
+          placeholder="type a word to look up…"
+          autocomplete="off"
+          spellcheck="false"
+          required
+        />
+        <button type="submit" class="lookup-btn">Look up</button>
+      </form>
+      <div class="rail-meta">
+        <span id="statusLine">Enter a word above to begin your entry.</span>
+      </div>
+    </section>
+
+    <section id="resultArea" class="result-area" aria-live="polite">
+      <div class="blank-page">
+        <p class="blank-quote">“The person who does not learn a new word every day is not learning at all.”</p>
+        <p class="blank-sub">Your looked-up words will be typeset here, dictionary-style.</p>
+      </div>
+    </section>
+
+    <aside class="saved-rail" aria-label="Saved words">
+      <div class="saved-header">
+        <h2>Bookmarked</h2>
+        <span id="savedCount" class="saved-count">0</span>
+      </div>
+      <ul id="savedList" class="saved-list">
+        <li class="saved-empty">No words saved yet. Star an entry to keep it here.</li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <footer class="page-footer">
+    <p>Definitions sourced from the Free Dictionary API. Built for Wordly's in-page lookup tool.</p>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>

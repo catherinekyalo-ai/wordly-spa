@@ -1,3 +1,7 @@
+// all code runs inside here
+document.addEventListener('DOMContentLoaded', () => {
+
+  //grab all elements we need to manipulate
 const input = document.getElementById('wordInput');
 const result = document.getElementById('result');
 const favList = document.getElementById('favList');
@@ -7,20 +11,21 @@ const themeBtn = document.getElementById('themeBtn');
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 // ----- Search -----
-document.getElementById('searchForm').addEventListener('submit', e => {
-  e.preventDefault();
+document.getElementById('searchForm').addEventListener('submit', event => {
+  event.preventDefault();
   if (input.value.trim()) lookupWord(input.value.trim());
+    result.innerHTML = '<p>Loading...</p>';
+
 });
 
 async function lookupWord(word) {
-  result.innerHTML = '<p>Loading...</p>';
   try {
-    const res = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word);
-    if (!res.ok) throw new Error('not found');
-    const [entry] = await res.json();
+    const result= await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word);
+    if (!result.ok) throw new Error('not found');
+    const [entry] = await result.json();
     showResult(entry);
   } catch {
-    result.innerHTML = `<p class="error">❌ "${word}" was not found. Check the spelling and try again.</p>`;
+    result.innerHTML = `<p class="error">❌ "${word}" was not found. Net failure or Server failure.</p>`;
   }
 }
 
@@ -66,8 +71,8 @@ function removeFavorite(word) {
 
 function renderFavorites() {
   favList.innerHTML = favorites.length
-    ? favorites.map(w => `<li><span style="cursor:pointer" onclick="lookupWord('${w}')">${w}</span>
-        <button onclick="removeFavorite('${w}')">Remove</button></li>`).join('')
+    ? favorites.map(word=> `<li><span style="cursor:pointer" onclick="lookupWord('${word}')">${word}</span>
+        <button onclick="removeFavorite('${word}')">Remove</button></li>`).join('')
     : '<li>No favorites yet.</li>';
 }
 
@@ -79,3 +84,4 @@ themeBtn.addEventListener('click', () => {
 });
 
 renderFavorites();
+});
